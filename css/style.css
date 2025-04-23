@@ -1,0 +1,15 @@
+body{
+    font-family: "Special Gothic Expanded One", sans-serif;
+}
+.form,.product{
+    box-shadow:  0 5px 10px rgba(255, 255, 255,0.175); 
+}
+.product{
+    transition: 0.3s;
+}
+.product:hover{
+    transform: scale(1.02);
+}
+.product img{
+    height: 350px;
+}

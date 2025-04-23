@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./icon/favicon.ico">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
+    <title>Crud</title>
+    <!-- css files -->
+    <link rel="stylesheet" href="./css/all.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="bg-dark">
+  <!-- form -->
+          
+            <div class="card  form bg-dark text-white">
+              <div class="card-body">
+                <h3 class="card-title mb-4 text-center">Add Product</h3>
+                <div>
+                  <div class="mb-3">
+                    <label for="productName" class="form-label">Product Name</label>
+                    <input type="text" class="form-control" id="productName" name="productName">
+                  </div>
+    
+                  <div class="mb-3">
+                    <label for="productPrice" class="form-label">Price</label>
+                    <input type="number" class="form-control" id="productPrice" name="price">
+                  </div>
+    
+                  <div class="mb-3">
+                    <label for="productCategory" class="form-label">Category</label>
+                    <select class="form-select" id="productCategory" name="category">
+                      <option selected disabled value="">-- Select a Category --</option>
+                      <option value="Laptop">Laptop</option>
+                      <option value="Waching Machine">Waching Machine</option>
+                      <option value="Mobil">Mobil</option>
+                      <option value="Microwave">Microwave</option>
+                      <option value="Katel">Katel</option>
+                    </select>
+                  </div>
+    
+                  <div class="mb-3">
+                    <label for="productDescription" class="form-label">Description</label>
+                    <textarea class="form-control" id="productDescription" name="description" rows="3"></textarea>
+                  </div>
+    
+                  <div class="mb-3">
+                    <label for="productImage" class="form-label">Product Image</label>
+                    <input class="form-control"  type="file" id="productImage" name="image" accept="image/*">
+                  </div>
+    
+                  <div class="d-flex gap-2 flex-wrap flex-sm-nowrap">
+                    <button type="submit" class="btn btn-primary w-100" id="addproduct" onclick="addProduct()">Add Product</button>
+                    <button type="submit" class="btn btn-primary w-100  d-none" id="updateproduct" onclick="updateProduct(this.getAttribute('idx'))">Update Product</button>
+                    <button type="reset" class="btn btn-secondary w-100" onclick="clearForm()">Clear Form</button>
+                  </div>
+                </div>
+              </div>
+            </div>  
+      <!--  -->
+      <div class="container-fluid my-4">
+        <h1 class="text-center mb-4 text-white">Products</h1>
+        <input type="text" class="form-control w-75 m-auto mb-4" id="searchinput" onkeyup="filterProducts(this.value)" placeholder="Search...">
+        <div class="row g-4 " id="products">
+          
+        </div>
+      </div>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
+
+<!-- 
+<div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card bg-dark text-white product">
+              <img src="./images/abeostveo33s.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Name :</h5>
+                <p class="card-text mb-2">Description :</p>
+                <p class="card-text">price :</p>
+                <button class="btn btn-outline-danger w-100 mb-2">Delete <i class="fa-solid fa-trash"></i></button>
+                <button class="btn btn-outline-warning w-100">Update <i class="fa-solid fa-screwdriver"></i></button>
+              </div>
+            </div>
+          </div>
+-->
