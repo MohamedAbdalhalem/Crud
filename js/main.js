@@ -28,7 +28,7 @@ function validateSpecifieInput(regex,input) {
         return false;
     }
 }
-productName.addEventListener("keyup",()=>{validateSpecifieInput(/^[A-Z][a-zA-Z]{1,}$/,productName)})
+productName.addEventListener("keyup",()=>{validateSpecifieInput(/^[A-Z][a-zA-Z0-9\s]{1,}$/,productName)})
 productPrice.addEventListener("keyup",()=>{validateSpecifieInput(/^(100000|[1-9][0-9]{3,4})$/,productPrice)})
 productDescription.addEventListener("keyup", () => { validateSpecifieInput(/^.+$/, productDescription) })
 
@@ -52,12 +52,12 @@ productCategory.addEventListener("change",()=>{validateImageAndCategory(productC
 productImage.addEventListener("change",()=>{validateImageAndCategory(productImage)})
 // add new product to the list
 function addProduct() {
-    validateSpecifieInput(/^[A-Z][a-zA-Z]{1,}$/, productName)
+    validateSpecifieInput(/^[A-Z][a-zA-Z0-9\s]{1,}$/, productName)
     validateSpecifieInput(/^(100000|[1-9][0-9]{3,4})$/, productPrice) 
     validateImageAndCategory(productCategory)
     validateSpecifieInput(/^.+$/, productDescription)
     validateImageAndCategory(productImage)
-    if (validateSpecifieInput(/^[A-Z][a-zA-Z]{1,}$/, productName) &&
+    if (validateSpecifieInput(/^[A-Z][a-zA-Z0-9\s]{1,}$/, productName) &&
         validateSpecifieInput(/^(100000|[1-9][0-9]{3,4})$/, productPrice) &&
         validateImageAndCategory(productCategory) &&
         validateSpecifieInput(/^.+$/, productDescription) &&
@@ -130,7 +130,7 @@ function returnValuesToInputs(index) {
 }
 // function update the data of product
 function updateProduct(idx) {
-    if (validateSpecifieInput(/^[A-Z][a-zA-Z]{1,}$/, productName) &&
+    if (validateSpecifieInput(/^[A-Z][a-zA-Z0-9\s]{1,}$/, productName) &&
     validateSpecifieInput(/^(100000|[1-9][0-9]{3,4})$/, productPrice) &&
     validateImageAndCategory(productCategory) &&
     validateSpecifieInput(/^.+$/, productDescription)) {
