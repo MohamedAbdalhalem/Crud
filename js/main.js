@@ -7,25 +7,75 @@ var products = document.getElementById("products");
 var addButton = document.getElementById("addproduct");
 var updateButton = document.getElementById("updateproduct");
 var searchInput = document.getElementById("searchinput");
+productCategory.nextElementSibling.classList.add("d-none")
 // list of producsts
 var allproucts = [];
 if (localStorage.getItem("products") != null) {
     allproucts = JSON.parse(localStorage.getItem("products"))
     displayAllProducts()
 }
+// validation function
+function validateSpecifieInput(regex,input) {
+    if (regex.test(input.value)) {
+        input.classList.add("is-valid")
+        input.classList.remove("is-invalid")
+        input.nextElementSibling.classList.add("d-none")
+        return true;
+    } else {
+        input.classList.remove("is-valid")
+        input.classList.add("is-invalid")
+        input.nextElementSibling.classList.remove("d-none")
+        return false;
+    }
+}
+productName.addEventListener("keyup",()=>{validateSpecifieInput(/^[A-Z][a-zA-Z]{1,}$/,productName)})
+productPrice.addEventListener("keyup",()=>{validateSpecifieInput(/^(100000|[1-9][0-9]{3,4})$/,productPrice)})
+productDescription.addEventListener("keyup", () => { validateSpecifieInput(/^.+$/, productDescription) })
+
+// function to validate image and description
+function validateImageAndCategory(input) {
+    if (input.value != "") {
+        input.classList.add("is-valid")
+        input.classList.remove("is-invalid")
+        input.nextElementSibling.classList.add("d-none")
+        return true;
+    } else {
+        input.classList.remove("is-valid")
+        input.classList.add("is-invalid")
+        input.nextElementSibling.classList.remove("d-none")
+        return false;
+    }
+}
+// validateImageAndDescription(productDescription);
+// validateImageAndDescription(productImage);
+productCategory.addEventListener("change",()=>{validateImageAndCategory(productCategory)})
+productImage.addEventListener("change",()=>{validateImageAndCategory(productImage)})
 // add new product to the list
 function addProduct() {
-    var product = {
-        name: productName.value,
-        price: productPrice.value,
-        category: productCategory.value,
-        description: productDescription.value,
-        image: productImage.files[0].name
-    };
-    allproucts.push(product);
-    localStorage.setItem("products", JSON.stringify(allproucts));
-    displayAllProducts()
-    clearForm()
+    validateSpecifieInput(/^[A-Z][a-zA-Z]{1,}$/, productName)
+    validateSpecifieInput(/^(100000|[1-9][0-9]{3,4})$/, productPrice) 
+    validateImageAndCategory(productCategory)
+    validateSpecifieInput(/^.+$/, productDescription)
+    validateImageAndCategory(productImage)
+    if (validateSpecifieInput(/^[A-Z][a-zA-Z]{1,}$/, productName) &&
+        validateSpecifieInput(/^(100000|[1-9][0-9]{3,4})$/, productPrice) &&
+        validateImageAndCategory(productCategory) &&
+        validateSpecifieInput(/^.+$/, productDescription) &&
+        validateImageAndCategory(productImage)) {
+        var product = {
+            name: productName.value,
+            price: productPrice.value,
+            category: productCategory.value,
+            description: productDescription.value,
+            image: productImage.files[0].name
+        };
+        allproucts.push(product);
+        localStorage.setItem("products", JSON.stringify(allproucts));
+        displayAllProducts()
+        clearForm()
+        clearValidation()
+    }
+
  }
 // display all products
 function displayAllProducts() {
@@ -35,9 +85,9 @@ function displayAllProducts() {
             <div class="card bg-dark text-white product h-100">
               <img src="./images/${allproucts[i].image}" class="card-img-top object-fit-fill" alt="...">
               <div class="card-body">
-                <h5 class="card-title">Name :${allproucts[i].name}</h5>
-                <p class="card-text mb-2">Description :${allproucts[i].description}</p>
-                <p class="card-text">price :${allproucts[i].price}</p>
+                <h5 class="card-title">Name : ${allproucts[i].name}</h5>
+                <p class="card-text mb-2">Description : ${allproucts[i].description}</p>
+                <p class="card-text">price : ${allproucts[i].price} EGP</p>
                 <button class="btn btn-outline-danger w-100 mb-2" onclick="deleteProduct(${i})">Delete <i class="fa-solid fa-trash"></i></button>
                 <button class="btn btn-outline-warning w-100" onclick="returnValuesToInputs(${i})">Update <i class="fa-solid fa-screwdriver" "></i></button>
               </div>
@@ -53,6 +103,14 @@ function clearForm() {
     productDescription.value = null; 
     productCategory.value = null; 
     productImage.value = null;
+}
+// function to clear validation class from inputs
+function clearValidation() {
+    productName.classList.remove("is-valid")
+    productPrice.classList.remove("is-valid")
+    productDescription.classList.remove("is-valid")
+    productCategory.classList.remove("is-valid")
+    productImage.classList.remove("is-valid")
 }
 // delete product from the list
 function deleteProduct(index) {
@@ -72,7 +130,11 @@ function returnValuesToInputs(index) {
 }
 // function update the data of product
 function updateProduct(idx) {
-    allproucts[idx].name = productName.value;
+    if (validateSpecifieInput(/^[A-Z][a-zA-Z]{1,}$/, productName) &&
+    validateSpecifieInput(/^(100000|[1-9][0-9]{3,4})$/, productPrice) &&
+    validateImageAndCategory(productCategory) &&
+    validateSpecifieInput(/^.+$/, productDescription)) {
+        allproucts[idx].name = productName.value;
     allproucts[idx].price = productPrice.value;
     allproucts[idx].category = productCategory.value;
     allproucts[idx].description = productDescription.value;
@@ -81,9 +143,13 @@ function updateProduct(idx) {
     }
     localStorage.setItem("products", JSON.stringify(allproucts));
     displayAllProducts();
-    clearForm();
+        clearForm();
+        clearValidation();
     addButton.classList.remove("d-none");
-    updateButton.classList.add("d-none");
+        updateButton.classList.add("d-none");
+        
+    }
+    
 }
 // function to filteration
 function filterProducts(name) {
@@ -106,4 +172,3 @@ function filterProducts(name) {
     }
     products.innerHTML = str;
 }
-"".toLocaleLowerCase

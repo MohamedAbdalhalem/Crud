@@ -22,11 +22,13 @@
                   <div class="mb-3">
                     <label for="productName" class="form-label">Product Name</label>
                     <input type="text" class="form-control" id="productName" name="productName">
+                    <p class="text-danger d-none">the name must be start with capital letter</p>
                   </div>
     
                   <div class="mb-3">
                     <label for="productPrice" class="form-label">Price</label>
                     <input type="number" class="form-control" id="productPrice" name="price">
+                    <p class="text-danger d-none">the price should be between 1K to 100K</p>
                   </div>
     
                   <div class="mb-3">
@@ -39,16 +41,19 @@
                       <option value="Microwave">Microwave</option>
                       <option value="Katel">Katel</option>
                     </select>
+                    <p class="text-danger d-none">you must choise category.</p>
                   </div>
     
                   <div class="mb-3">
                     <label for="productDescription" class="form-label">Description</label>
                     <textarea class="form-control" id="productDescription" name="description" rows="3"></textarea>
+                    <p class="text-danger d-none">you must provide a product description.</p>
                   </div>
     
                   <div class="mb-3">
                     <label for="productImage" class="form-label">Product Image</label>
                     <input class="form-control"  type="file" id="productImage" name="image" accept="image/*">
+                    <p class="text-danger d-none">you must choose a product image.</p>
                   </div>
     
                   <div class="d-flex gap-2 flex-wrap flex-sm-nowrap">
