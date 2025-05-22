@@ -28,9 +28,9 @@ function validateSpecifieInput(regex,input) {
         return false;
     }
 }
-productName.addEventListener("keyup",()=>{validateSpecifieInput(/^[A-Z][a-zA-Z0-9\s]{1,}$/,productName)})
-productPrice.addEventListener("keyup",()=>{validateSpecifieInput(/^(100000|[1-9][0-9]{3,4})$/,productPrice)})
-productDescription.addEventListener("keyup", () => { validateSpecifieInput(/^.+$/, productDescription) })
+productName.addEventListener("blur",()=>{validateSpecifieInput(/^[A-Z][a-zA-Z0-9\s]{1,}$/,productName)})
+productPrice.addEventListener("blur",()=>{validateSpecifieInput(/^(100000|[1-9][0-9]{3,4})$/,productPrice)})
+productDescription.addEventListener("blur", () => { validateSpecifieInput(/^.+$/, productDescription) })
 
 // function to validate image and description
 function validateImageAndCategory(input) {
@@ -74,6 +74,7 @@ function addProduct() {
         displayAllProducts()
         clearForm()
         clearValidation()
+        products.scrollIntoView({behavior:"smooth"})
     }
 
  }
@@ -120,6 +121,7 @@ function deleteProduct(index) {
 }
 // function to return data to inputs
 function returnValuesToInputs(index) {
+    document.querySelector(".form").scrollIntoView({behavior:"smooth"})
     addButton.classList.add("d-none");
     updateButton.classList.remove("d-none")
     updateButton.setAttribute("idx", index);
@@ -143,11 +145,11 @@ function updateProduct(idx) {
     }
     localStorage.setItem("products", JSON.stringify(allproucts));
     displayAllProducts();
-        clearForm();
-        clearValidation();
+    clearForm();
+    clearValidation();
     addButton.classList.remove("d-none");
-        updateButton.classList.add("d-none");
-        
+    updateButton.classList.add("d-none");
+    products.scrollIntoView({behavior:"smooth"})
     }
     
 }
